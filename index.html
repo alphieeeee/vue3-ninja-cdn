@@ -1,0 +1,138 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="topics">
+            <div class="topic">
+                <h2>Topic 1</h2>
+                <p> {{ title }} - {{ author }} - {{ age }} </p>
+                <button @click="age++">Increase Age</button>
+                <button @click="age--">Decrease Age</button>
+                <br><br>
+                <div @click="changeTitle('The End 2')">Change Title</div>
+            </div>
+
+            <div class="topic">
+                <h2>Topic 2</h2>
+                <div v-if="showBooks">
+                    Toggle Books
+                </div>
+                <button @click="toggleShowBooks">
+                    <span v-if="showBooks">Hide books</span>
+                    <span v-else>Show books</span>
+                </button>
+            </div>
+
+            <div class="topic">
+                <h2>Topic 3</h2>
+                <div class="box" @mouseover="handleEvents($event, 3)">mouse over</div>
+                <div class="box" @mouseleave="handleEvents">mouse leave</div>
+                <div class="box" @dblclick="handleEvents">double click</div>
+                <div class="box" @mousemove="handleMouseMove">position -  {{ x }} - {{ y }} </div>
+            </div>
+
+            <div class="topic">
+                <h2>Topic 4</h2>
+                <div v-if="showBooks">
+                    <br>
+                    <h3>These are my favorites</h3>
+                    <uL>
+                        <li v-if="!checkFavorite" v-for="book in favBooks" :class="{ fav: book.isFav }" @click="toggleFav(book)">
+                            <div>
+                                <img :src="book.img" :alt="book.title">
+                            </div>
+                            <h3> {{ book.title }} </h3>
+                            <p> {{ book.author }} </p>
+                        </li>
+                        <li v-else class="fav">No favorite at all</li>
+                    </uL>
+                    
+                    <br>
+                    <h3>These are so so..</h3>
+                    <uL>
+                        <li v-if="!checkNotFavorite" v-for="book in notSoFavBooks" :class="{ fav: book.isFav }" @click="toggleFav(book)">
+                            <div>
+                                <img :src="book.img" :alt="book.title">
+                            </div>
+                            <h3> {{ book.title }} </h3>
+                            <p> {{ book.author }} </p>
+                        </li>
+                        <li v-else>All are favorites</li>
+                    </uL>
+                </div>
+                <button @click="toggleShowBooks">
+                    <span v-if="showBooks">Hide books</span>
+                    <span v-else>Show books</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <style scoped>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+        p, h1, h2, h3, h4, h5, h6, ul {
+            padding: 0;
+            margin: 0;
+        }
+
+        .box {
+            padding: 100px 0;
+            width: 400px;
+            text-align: center;
+            background-color: #ddd;
+            margin: 20px;
+            display: inline-block;
+        }
+
+        li {
+            list-style-type: none;
+            background: #fff;
+            margin: 20px auto;
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        li.fav {
+            background: #ff9ed2;
+            color: #fff;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+        .topic {
+            padding: 20px;
+        }
+        
+        #topics > .topic:first-child {
+            background: blue;
+        }
+
+        #topics > .topic:nth-child(2) {
+            background: red;
+        }
+
+        #topics > .topic:nth-child(3) {
+            background: green;
+        }
+
+        #topics > .topic:nth-child(4) {
+            background: yellow;
+        }
+    </style>
+</body>
+</html>
